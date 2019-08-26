@@ -1,0 +1,27 @@
+SYNONYMSTATEMENTS ::= CREATESTATEMENT | DROPSTATEMENT
+
+CREATESTATEMENT ::= 'CREATE' ('OR REPLACE')?  'PUBLIC'? 'SYNONYM' synonyme_name 'FOR' synonym_source_object_name
+
+DROPSTATEMENT ::= 'DROP' 'PUBLIC'? 'SYNONYM' synonym_name ('CASCADE' | 'RESTRICT')?
+
+
+synonyme_name ::=  schema_name? identifier
+
+
+
+synonym_source_object_name ::=
+   table_name
+ | view_name
+ | procedure_name
+ | sequence_name
+
+table_name     ::= (database_name'.')?(schema_name'.')?identifier
+view_name      ::= (database_name'.')?(schema_name'.')?identifier
+sequence_name  ::= (database_name'.')?(schema_name'.')?identifier
+procedure_name ::= (database_name'.')?(schema_name'.')?identifier
+
+database_name ::= identifier
+schema_name ::= unicode_name 
+
+identifier ::= [a-zA-Z][a-zA-Z0-9/&]*
+unicode_name ::= 
