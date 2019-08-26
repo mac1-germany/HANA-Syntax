@@ -1,4 +1,6 @@
-Create_Table_Statement ::= "CREATE" "table_type"? "TABLE" table_name 
+Create_Table_Statements ::=  Create_Table_Stmt | Create_Virtual_Table_Stmt
+
+Create_Table_Stmt::= "CREATE" "table_type"? "TABLE" table_name 
     table_contents_source 
     "logging_option"? 
     "auto_merge_option"?
@@ -11,4 +13,5 @@ Create_Table_Statement ::= "CREATE" "table_type"? "TABLE" table_name
     "global_temporary_option"?
     "series_clause"?
 
- CREATE VIRTUAL TABLE table_name remote_location_clause
+ Create_Virtual_Table_Stmt ::= "CREATE" "VIRTUAL" "TABLE" table_name 
+    remote_location_clause
