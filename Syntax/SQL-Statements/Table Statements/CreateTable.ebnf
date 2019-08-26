@@ -1,0 +1,14 @@
+Create_Table_Statement ::= "CREATE" "table_type"? "TABLE" table_name 
+    table_contents_source 
+    "logging_option"? 
+    "auto_merge_option"?
+    "unload_priority_clause"? 
+    "schema_flexibility_option"?
+    "partition_clause"?
+    "group_option"?
+    "location_clause"?
+    "replica_clause"?
+    "global_temporary_option"?
+    "series_clause"?
+
+ CREATE VIRTUAL TABLE table_name remote_location_clause
