@@ -15,3 +15,70 @@ Create_Table_Stmt::= "CREATE" "table_type"? "TABLE" table_name
 
  Create_Virtual_Table_Stmt ::= "CREATE" "VIRTUAL" "TABLE" table_name 
     remote_location_clause
+
+table_type ::= 
+(  ROW
+   | ( COLUMN )?  
+   | ( GLOBAL | LOCAL) TEMPORARY (( ROW )? | COLUMN ) 
+   | VIRTUAL 
+)
+
+
+column_definition ::= column_name (data_type | lob_data_type) 
+   (default_value_clause)?
+   (col_gen_as_expression | col_gen_as_ident )?
+   ( col_calculated_field )?
+
+data_type ::=
+ARRAY
+ | DATE 
+ | TIME 
+ | SECONDDATE 
+ | TIMESTAMP 
+ | TINYINT 
+ | SMALLINT 
+ | INT
+ | BIGINT 
+ | SMALLDECIMAL 
+ | REAL 
+ | DOUBLE
+ | NVARCHAR  ((unsigned_integer))?
+ | VARBINARY ((unsigned_integer))?
+ | FLOAT ( (unsigned_integer) )? 
+ | BOOLEAN
+
+default_value_clause ::= DEFAULT default_value_exp
+
+default_value_exp ::= 
+ NULL 
+ | string_literal
+ | signed_numeric_literal unsigned_numeric_literal 
+ | datetime_value_function
+
+datetime_value_function ::= 
+ CURRENT_DATE 
+ | CURRENT_TIME 
+ | CURRENT_TIMESTAMP 
+ | CURRENT_UTCDATE 
+ | CURRENT_UTCTIME 
+ | CURRENT_UTCTIMESTAMP
+
+col_gen_as_ident ::= 
+ GENERATED ( ALWAYS | BY DEFAULT ) AS IDENTITY ( ( sequence_option )   )?
+sequence_option ::= 
+ sequence_param_list 
+ | RESET BY subquery 
+ | sequence_param_list RESET BY subquery
+sequence_param_list ::= sequence_parameter* 
+sequence_parameter ::= 
+ START WITH start_value
+ | INCREMENT BY increment_value
+ | MAXVALUE max_value
+ | NO MAXVALUE
+ | MINVALUE min_value
+ | NO MINVALUE
+ | CYCLE
+ | NO CYCLE
+ | CACHE cache_size
+ | NO CACHE
+ | RESET BY subquery
